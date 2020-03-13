@@ -1,0 +1,71 @@
+{% set name = "taurus" %}
+{% set version = "4.6.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+
+build:
+  number: 1
+  noarch: python
+  entry_points:
+    - taurus = taurus.cli:main
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pyqt
+    - lxml
+    - guidata
+    - guiqwt
+    - ipython
+    - pillow
+    - ply
+    - pythonqwt
+    - click
+    - future
+    - numpy
+    - scipy
+    - pymca
+    - pint
+    - python
+    - setuptools
+  run:
+    - pyqt
+    - lxml
+    - guidata
+    - guiqwt
+    - ipython
+    - pillow
+    - ply
+    - pythonqwt
+    - click
+    - future
+    - numpy
+    - scipy
+    - pymca
+    - pint
+    - python
+    - setuptools
+
+test:
+  imports:
+    - taurus
+    - taurus.core
+  commands:
+    - taurus --help
+
+about:
+  home: "http://www.taurus-scada.org"
+  license: "GNU Lesser General Public v3 or later (LGPLv3+)"
+  license_family: LGPL
+  summary: "A framework for scientific/industrial CLIs and GUIs"
+  doc_url: "http://www.taurus-scada.org"
+  dev_url: "https://github.com/taurus-org/"
+
+extra:
+  recipe-maintainers:
+    - cpascual
